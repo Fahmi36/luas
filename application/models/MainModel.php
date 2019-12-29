@@ -5,8 +5,9 @@ class MainModel extends CI_Model {
 
 	public function getData()
 	{
-		$this->db->select('id,luas,alamat,created_at');
+		$this->db->select('id,luas,alamat,status,created_at');
 		$this->db->from('aset');
+		$this->db->where('status', 0);
 		$query = $this->db->get();
 		return $query->result();
 	}
@@ -43,7 +44,15 @@ class MainModel extends CI_Model {
 			'alamat'=>$this->input->post('alamat'),
 			'luas'=>$this->input->post('luasedit'),
 			'luasha'=>$this->input->post('luaseditha'),
+			'status'=>'0',
 		),array('id'=>$this->input->post('idaset')));
+		return $query;
+	}
+	public function hapusData()
+	{
+		$query = $this->db->update('aset', array(
+			'status'=>'1',
+		),array('id'=>$this->input->post('id')));
 		return $query;
 	}
 	    function getKotaJson()

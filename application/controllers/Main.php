@@ -70,6 +70,21 @@ class Main extends CI_Controller {
 			$this->failjsonResponse($msg);
 		}
 	}
+	public function HapusData()
+	{
+		try {
+			$action = $this->MainModel->hapusData();
+			if ($action==true) {
+				$msg = 'Berhasil Hapus data';
+				$this->jsonResponse($msg);
+			}else{
+				$msg = 'Gagal Hapus data';
+				$this->failjsonResponse($msg);
+			}
+		} catch (Exception $e) {
+			$this->failjsonResponse($msg);
+		}
+	}
 	public function getKota()
 	{
 		try {

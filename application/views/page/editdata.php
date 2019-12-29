@@ -158,7 +158,7 @@
 
         for(i=0;i<msg.wilayah.lahan.length;i++){
           lokasi[i] = msg.wilayah.lahan[i].polygon;
-          var str = lokasi[i].split(" "); 
+          var str = lokasi[i].split("<br>"); 
 
           for (var j=0; j < str.length; j++) { 
             var point = str[j].split(",");
@@ -197,10 +197,14 @@
                       contentString += '<br>' + xy.lat()+','+xy.lng();
                     }
                     var h =  google.maps.geometry.spherical.computeArea(this.getPath()).toFixed(2);
-                    $('#polygonedit').val(contentString);
+
+                    var res = contentString.split("undefined");
+                    $('#polygonedit').val(res);
+
                     $('#luasedit').val(h);
-  
-  var hektar = area/10000;                  $('#luaseditha').val()hektar.toFixed(2);
+                    
+                    var hektar = h/10000;
+                    $('#luaseditha').val(hektar.toFixed(2));
 
                     // Replace the info window's content and position.
                     infoWindows.setContent("Polygon Berhasil Dirubah");
@@ -242,8 +246,9 @@
         var xy = po.getAt(i);
         contentString += '<br>' + xy.lat()+','+xy.lng();
       }
+      var res = contentString.split("undefined");
       var area = google.maps.geometry.spherical.computeArea(poly.getPath().getArray()).toFixed(2);
-      $('#polygonedit').val(contentString);
+      $('#polygonedit').val(res);
       $('#luasedit').val(area);
       var hektar = area/10000;
       $('#luaseditha').val(hektar.toFixed(2));
@@ -258,8 +263,8 @@
                   }
 
                   var area = google.maps.geometry.spherical.computeArea(poly.getPath().getArray()).toFixed(2);
-              
-                  $('#polygonedit').val(contentString);
+                  var res = contentString.split("undefined");
+                  $('#polygonedit').val(res);
                   $('#luasedit').val(area);
                   var hektar = area/10000;
                   $('#luaseditha').val(hektar.toFixed(2));
