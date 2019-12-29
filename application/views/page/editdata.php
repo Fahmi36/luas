@@ -15,6 +15,13 @@
               M<sup>2</sup>
             </span>
           </div>
+          <div class="form-group label-floating has-success">
+            <label class="control-label">Luas Tanah</label>
+            <input type="text" name="luasha" value="<?=$datanya->luasha?>" id="luaseditha" class="form-control" />
+            <span class="form-control-feedback">
+              Hektar<sup>2</sup>
+            </span>
+          </div>
           <div class="form-group">
             <label for="exampleInputPassword1">Alamat</label>
             <textarea class="form-control" name="alamat" id="alamatedit"><?=$datanya->alamat?></textarea>

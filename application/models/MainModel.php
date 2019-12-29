@@ -26,6 +26,7 @@ class MainModel extends CI_Model {
 			'kota'=>$this->input->post('sel_kota'),
 			'alamat'=>$this->input->post('alamat'),
 			'luas'=>$this->input->post('luas'),
+			'luasha'=>$this->input->post('luasha'),
 			'created_at'=>date('Y-m-d'),
 		));
 		return $query;
@@ -40,7 +41,8 @@ class MainModel extends CI_Model {
 			// 'kecamatan'=>$this->input->post('kec'),
 			// 'kota'=>$this->input->post('kota'),
 			'alamat'=>$this->input->post('alamat'),
-			'luas'=>$this->input->post('luas'),
+			'luas'=>$this->input->post('luasedit'),
+			'luasha'=>$this->input->post('luaseditha'),
 		),array('id'=>$this->input->post('idaset')));
 		return $query;
 	}
