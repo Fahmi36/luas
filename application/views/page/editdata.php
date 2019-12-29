@@ -106,7 +106,7 @@
                     success: function (response) {
                       console.log(response);
                       Swal.fire(
-                        '"'+response.msg+'"',
+                        'Data berhasil di ubah',
                         );
                       $("#kirimeditpolygon")[0].reset();
                     },
@@ -196,7 +196,7 @@
                       var xy = vertices.getAt(i);
                       contentString += '<br>' + xy.lat()+','+xy.lng();
                     }
-                    var h =  google.maps.geometry.spherical.computeArea(this.getPath())).toFixed(2);
+                    var h =  google.maps.geometry.spherical.computeArea(this.getPath()).toFixed(2);
                     $('#polygonedit').val(contentString);
                     $('#luasedit').val(h);
                     $('#luaseditha').val(area/10000).toFixed(2);

@@ -213,9 +213,9 @@
                     cache: false,
                     processData: false,
                     success: function (response) {
-                      console.log(response);
+                      // console.log(response);
                       Swal.fire(
-                        ''+response.msg+'',
+                        'Data Berhasil di simpan',
                         );
                       $("#kirimpolygon")[0].reset();
                     },
