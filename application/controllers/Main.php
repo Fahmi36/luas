@@ -29,7 +29,7 @@ class Main extends CI_Controller {
 	}
 	public function hitung_luas()
 	{
-		$data['link_page'] = 'page/Hitung';
+		$data['link_page'] = 'page/hitung';
 		$data['title'] = 'Halaman Hitung';
 		$this->load->view('utama', $data);
 	}
