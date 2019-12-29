@@ -22,124 +22,180 @@
   <link href="https://cdn.jsdelivr.net/npm/select2@4.0.12/dist/css/select2.min.css" rel="stylesheet" />
 </head>
 <style type="text/css">
-  // Play with these numbers
-$animation-duration-in-out: 2s;
-$animation-duration-spin: 1.3s; // odd number to make it look random
-$radius: 80px;
-$stroke-dashoffset-gap: 30;
-$background-color: rgba(lightgreen, 0.6);
-$stroke-width: 60;
-
-// Static value
-$circle-length: 314*2; // PI * 2 * radius
-
-html,
-body {
-  height: 100%;
-}
-body {
-  position: relative;
-  margin: 0;
-  min-height: 100%;
+.loader-overlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
   display: flex;
-  justify-content: center;
   align-items: center;
-  font: 16px sans-serif;
-  color: #333;
+  justify-content: center;
+  z-index: 999;
+  background: rgba(106, 106, 106, 0.9);
 }
-
-.svg-loader {
-  &:hover {
-    // This is extra stuff, not needed for the spinner
-    + .overlay {
-      &:after {
-        opacity: 1;
-      }
-    }
-  }
-  transition: 1s;
-  z-index: 2;
+.loader-overlay .loader {
+  position: relative;
+  width: 100px;
+  height: 100px;
+  /* 4 x 6 = 24 */
+}
+.loader-overlay .loader .accent-pink {
+  background-color: #ee8ebc;
+}
+.loader-overlay .loader .accent-orange {
+  background-color: #eec08e;
+}
+.loader-overlay .loader .accent-green {
+  background-color: #bcee8e;
+}
+.loader-overlay .loader .accent-cyan {
+  background-color: #8eeec0;
+}
+.loader-overlay .loader .accent-blue {
+  background-color: #8ebcee;
+}
+.loader-overlay .loader .accent-purple {
+  background-color: #c08eee;
+}
+.loader-overlay .loader .dot {
   position: absolute;
-  top: calc(50% - #{$radius});
-  left: calc(50% - #{$radius});
-  width: $radius*2;
-  height: $radius*2;
-  fill: rgba(mediumseagreen, 0.8);
-  //box-shadow:  0 0 0 1px red; //outline: 1px dashed red; // debug
-  overflow: visible;
-  animation: spin linear $animation-duration-spin infinite forwards; // IE11 supports this
-
-  .svg-circle {
-    stroke: $background-color;
-    stroke-width: $stroke-width;
-    stroke-dasharray: $circle-length;
-    stroke-dashoffset: $stroke-dashoffset-gap;
-    animation: dash $animation-duration-in-out ease-in-out infinite forwards; // // IE11 fails
-    transform-origin: 50% 50%;
-  }
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  border-radius: 50%;
+}
+.loader-overlay .loader .dot:before {
+  content: '';
+  display: block;
+  width: 5px;
+  height: 5px;
+}
+.loader-overlay .loader .dot:nth-child(1) {
+  -webkit-animation: animate-loader-dots 2.4s linear -0.4s infinite backwards;
+          animation: animate-loader-dots 2.4s linear -0.4s infinite backwards;
+}
+.loader-overlay .loader .dot:nth-child(2) {
+  -webkit-animation: animate-loader-dots 2.4s linear -0.8s infinite backwards;
+          animation: animate-loader-dots 2.4s linear -0.8s infinite backwards;
+}
+.loader-overlay .loader .dot:nth-child(3) {
+  -webkit-animation: animate-loader-dots 2.4s linear -1.2s infinite backwards;
+          animation: animate-loader-dots 2.4s linear -1.2s infinite backwards;
+}
+.loader-overlay .loader .dot:nth-child(4) {
+  -webkit-animation: animate-loader-dots 2.4s linear -1.6s infinite backwards;
+          animation: animate-loader-dots 2.4s linear -1.6s infinite backwards;
+}
+.loader-overlay .loader .dot:nth-child(5) {
+  -webkit-animation: animate-loader-dots 2.4s linear -2s infinite backwards;
+          animation: animate-loader-dots 2.4s linear -2s infinite backwards;
+}
+.loader-overlay .loader .dot:nth-child(6) {
+  -webkit-animation: animate-loader-dots 2.4s linear -2.4s infinite backwards;
+          animation: animate-loader-dots 2.4s linear -2.4s infinite backwards;
 }
 
-@keyframes dash {
-  0%,
-  100% {
-    stroke-dashoffset: $stroke-dashoffset-gap;
+@-webkit-keyframes animate-loader-dots {
+  0% {
+    top: 20%;
+    left: 50%;
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+  16% {
+    top: 35%;
+    left: 75%;
+    -webkit-transform: scale(3);
+            transform: scale(3);
+  }
+  33% {
+    top: 65%;
+    left: 75%;
+    -webkit-transform: scale(1);
+            transform: scale(1);
   }
   50% {
-    stroke-dashoffset: $circle-length - $stroke-dashoffset-gap;
+    top: 80%;
+    left: 50%;
+    -webkit-transform: scale(3);
+            transform: scale(3);
   }
-}
-@keyframes spin {
-  0% {
-    transform: rotateZ(0deg);
+  66% {
+    top: 65%;
+    left: 25%;
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+  83% {
+    top: 35%;
+    left: 25%;
+    -webkit-transform: scale(3);
+            transform: scale(3);
   }
   100% {
-    transform: rotateZ(360deg);
+    top: 20%;
+    left: 50%;
+    -webkit-transform: scale(1);
+            transform: scale(1);
   }
 }
 
-// This is extra stuff, not needed for the spinner
-.overlay {
-  transition: 1s;
-  background: radial-gradient(rgba(white, 0.5), rgba(lightgreen, 0.5));
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  &:after {
-    // transition not supported for radial-gradient, using pseudo with opacity trick
-    position: absolute;
-    content: "";
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: white;
-    transition: 1s;
-    z-index: 1;
-    opacity: 0;
+@keyframes animate-loader-dots {
+  0% {
+    top: 20%;
+    left: 50%;
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+  16% {
+    top: 35%;
+    left: 75%;
+    -webkit-transform: scale(3);
+            transform: scale(3);
+  }
+  33% {
+    top: 65%;
+    left: 75%;
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+  50% {
+    top: 80%;
+    left: 50%;
+    -webkit-transform: scale(3);
+            transform: scale(3);
+  }
+  66% {
+    top: 65%;
+    left: 25%;
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+  83% {
+    top: 35%;
+    left: 25%;
+    -webkit-transform: scale(3);
+            transform: scale(3);
+  }
+  100% {
+    top: 20%;
+    left: 50%;
+    -webkit-transform: scale(1);
+            transform: scale(1);
   }
 }
-
-.content {
-  transition: opacity 5s ease-in;
-  opacity: 0;
-  font-size: 6vmin;
-}
-
 </style>
-<body class="">
-  <svg class="svg-loader js-svg-loader" viewBox="0 0 200 200" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">    
-    <defs>
-      <linearGradient id="loaderGradient">
-        <stop offset="5%"  stop-color="lightgreen" stop-opacity="0.5"/>
-        <stop offset="95%" stop-color="mediumseagreen" stop-opacity="0.5"/>
-      </linearGradient>
-    </defs>
-    <circle class="svg-circle" cx="100" cy="100" r="100" fill="url(#loaderGradient)" />
-  </svg>
-  <div class="overlay js-overlay" style="display: none;"></div>
-
+<body class="">      
+  <div class="loader-overlay" style="display: none;">
+        <div class="loader">
+          <div class="dot accent-pink"></div>
+          <div class="dot accent-orange"></div>
+          <div class="dot accent-green"></div>
+          <div class="dot accent-cyan"></div>
+          <div class="dot accent-blue"></div>
+          <div class="dot accent-purple"></div>
+        </div>
+      </div>
   <div class="wrapper ">
     <?php $this->load->view('incl/sidebar') ?>
     <div class="main-panel">
@@ -310,8 +366,6 @@ body {
           <script src="<?= base_url('') ?>/assets/js/demo.js"></script>
           <script>
             function removedatalahan(id) {
-              let loader = document.querySelector(".js-svg-loader"),
-              overlay = document.querySelector(".js-overlay");
               Swal.fire({
                 title: 'Apakah Yakin data akan di hapus ?',
                 text: "Klik Ya",
@@ -327,8 +381,7 @@ body {
                     type: "POST",
                     data: {id:id},
                     beforeSend:function() {
-                      loader.style.display = "block";
-                      overlay.style.display = "block";
+                      $(".loader-overlay").removeAttr('display');
                     },
                     success: function (response) {
                       Swal.fire(
@@ -350,8 +403,6 @@ body {
             $(document).ready(function() {
               $("#kirimpolygon").submit(function (event) {
                 var data = new FormData($(this)[0]);
-                let loader = document.querySelector(".js-svg-loader"),
-                overlay = document.querySelector(".js-overlay");
                 Swal.fire({
                   title: 'Data Sudah benar ?',
                   text: "Klik Ya",
@@ -370,8 +421,7 @@ body {
                       cache: false,
                       processData: false,
                       beforeSend:function (argument) {
-                        loader.style.display = "block";
-                        overlay.style.display = "block";
+                        $(".loader-overlay").removeAttr('display');
                       },
                       success: function (response) {
                       // console.log(response);
@@ -379,8 +429,8 @@ body {
                         'Data Berhasil di simpan',
                         );
                       $("#kirimpolygon")[0].reset();
-                        loader.style.display = "none";
-                        overlay.style.display = "none";
+
+                      $(".loader-overlay").attr('style', 'display:none;');
                     },
                     error: function () {
                       Swal.fire(

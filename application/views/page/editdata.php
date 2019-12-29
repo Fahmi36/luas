@@ -84,10 +84,7 @@
         <script src="<?= base_url('') ?>/assets/js/demo.js"></script>
   <script type="text/javascript">
     $(document).ready(function() {
-                  $("#kirimeditpolygon").submit(function (event) {
-                    
-                let loader = document.querySelector(".js-svg-loader"),
-                overlay = document.querySelector(".js-overlay");
+              $("#kirimeditpolygon").submit(function (event) {
               var data = new FormData($(this)[0]);
               Swal.fire({
                 title: 'Data Sudah benar ?',
@@ -107,8 +104,7 @@
                     cache: false,
                     processData: false,
                     beforeSend:function(argument) {
-                        loader.style.display = "block";
-                        overlay.style.display = "block";
+                        $(".loader-overlay").removeAttr('display');
                     },
                     success: function (response) {
                       Swal.fire(
