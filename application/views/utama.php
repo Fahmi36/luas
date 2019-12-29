@@ -207,9 +207,6 @@
                     url: '<?= site_url('Main/HapusData') ?>',
                     type: "POST",
                     data: {id:id},
-                    contentType: false,
-                    cache: false,
-                    processData: false,
                     success: function (response) {
                       Swal.fire(
                         'Data Berhasil di Hapus',
