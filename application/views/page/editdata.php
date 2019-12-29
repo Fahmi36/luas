@@ -26,7 +26,7 @@
             <label for="exampleInputPassword1">Alamat</label>
             <textarea class="form-control" name="alamat" id="alamatedit"><?=$datanya->alamat?></textarea>
           </div>
-          <div class="form-group" style="">
+          <div class="form-group" style="display: none;">
             <label for="exampleInputPassword1">polygon</label>
             <textarea class="form-control" name="polygon" id="polygonedit"><?=$datanya->polygon?></textarea>
           </div>
