@@ -85,6 +85,9 @@
   <script type="text/javascript">
     $(document).ready(function() {
                   $("#kirimeditpolygon").submit(function (event) {
+                    
+                let loader = document.querySelector(".js-svg-loader"),
+                overlay = document.querySelector(".js-overlay");
               var data = new FormData($(this)[0]);
               Swal.fire({
                 title: 'Data Sudah benar ?',
@@ -103,6 +106,10 @@
                     contentType: false,
                     cache: false,
                     processData: false,
+                    beforeSend:function(argument) {
+                        loader.style.display = "block";
+                        overlay.style.display = "block";
+                    },
                     success: function (response) {
                       Swal.fire(
                         'Data berhasil di ubah',
@@ -192,11 +199,9 @@
                       contentString += xy.lat()+','+xy.lng()+ '<br>';
                     }
                     var h =  google.maps.geometry.spherical.computeArea(this.getPath()).toFixed(2);
-
                     var res = contentString.split("undefined");
-                    var h =  res[1].slice(0, -1);
-                    var hasil = h.replace(/\s/g, '');
-                    $('#polygonedit').val(hasil);
+                    var sli = res[0].slice(0, -4);
+                    $('#polygonedit').val(sli);
                     $('#luasedit').val(h);
                     var hektar = h/10000;
                     $('#luaseditha').val(hektar.toFixed(2));
@@ -242,10 +247,10 @@
         contentString += xy.lat()+','+xy.lng()+ '<br>';
       }
       var res = contentString.split("undefined");
-      var area = google.maps.geometry.spherical.computeArea(poly.getPath().getArray()).toFixed(2);
       var h =  res[1].slice(0, -1);
-      var hasil = h.replace(/\s/g, '');
-      $('#polygonedit').val(hasil);
+      var cordinate = h.replace(/\s/g, '');
+      var area = google.maps.geometry.spherical.computeArea(poly.getPath().getArray()).toFixed(2);
+      $('#polygonedit').val(cordinate);
       $('#luasedit').val(area);
       var hektar = area/10000;
       $('#luaseditha').val(hektar.toFixed(2));
@@ -260,9 +265,10 @@
                   }
 
                   var area = google.maps.geometry.spherical.computeArea(poly.getPath().getArray()).toFixed(2);
-                  var res = contentString.split("undefined");var h =  res[1].slice(0, -1);
-                  var hasil = h.replace(/\s/g, '');
-                  $('#polygonedit').val(hasil);
+                  var res = contentString.split("undefined");
+                  var h =  res[1].slice(0, -1);
+                  var cordinate = h.replace(/\s/g, '');
+                  $('#polygonedit').val(cordinate);
                   $('#luasedit').val(area);
                   var hektar = area/10000;
                   $('#luaseditha').val(hektar.toFixed(2));

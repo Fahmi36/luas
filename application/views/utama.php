@@ -21,8 +21,125 @@
   <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap.min.css" rel="stylesheet" />
   <link href="https://cdn.jsdelivr.net/npm/select2@4.0.12/dist/css/select2.min.css" rel="stylesheet" />
 </head>
+<style type="text/css">
+  // Play with these numbers
+$animation-duration-in-out: 2s;
+$animation-duration-spin: 1.3s; // odd number to make it look random
+$radius: 80px;
+$stroke-dashoffset-gap: 30;
+$background-color: rgba(lightgreen, 0.6);
+$stroke-width: 60;
 
+// Static value
+$circle-length: 314*2; // PI * 2 * radius
+
+html,
+body {
+  height: 100%;
+}
+body {
+  position: relative;
+  margin: 0;
+  min-height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font: 16px sans-serif;
+  color: #333;
+}
+
+.svg-loader {
+  &:hover {
+    // This is extra stuff, not needed for the spinner
+    + .overlay {
+      &:after {
+        opacity: 1;
+      }
+    }
+  }
+  transition: 1s;
+  z-index: 2;
+  position: absolute;
+  top: calc(50% - #{$radius});
+  left: calc(50% - #{$radius});
+  width: $radius*2;
+  height: $radius*2;
+  fill: rgba(mediumseagreen, 0.8);
+  //box-shadow:  0 0 0 1px red; //outline: 1px dashed red; // debug
+  overflow: visible;
+  animation: spin linear $animation-duration-spin infinite forwards; // IE11 supports this
+
+  .svg-circle {
+    stroke: $background-color;
+    stroke-width: $stroke-width;
+    stroke-dasharray: $circle-length;
+    stroke-dashoffset: $stroke-dashoffset-gap;
+    animation: dash $animation-duration-in-out ease-in-out infinite forwards; // // IE11 fails
+    transform-origin: 50% 50%;
+  }
+}
+
+@keyframes dash {
+  0%,
+  100% {
+    stroke-dashoffset: $stroke-dashoffset-gap;
+  }
+  50% {
+    stroke-dashoffset: $circle-length - $stroke-dashoffset-gap;
+  }
+}
+@keyframes spin {
+  0% {
+    transform: rotateZ(0deg);
+  }
+  100% {
+    transform: rotateZ(360deg);
+  }
+}
+
+// This is extra stuff, not needed for the spinner
+.overlay {
+  transition: 1s;
+  background: radial-gradient(rgba(white, 0.5), rgba(lightgreen, 0.5));
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  &:after {
+    // transition not supported for radial-gradient, using pseudo with opacity trick
+    position: absolute;
+    content: "";
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: white;
+    transition: 1s;
+    z-index: 1;
+    opacity: 0;
+  }
+}
+
+.content {
+  transition: opacity 5s ease-in;
+  opacity: 0;
+  font-size: 6vmin;
+}
+
+</style>
 <body class="">
+  <svg class="svg-loader js-svg-loader" viewBox="0 0 200 200" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">    
+    <defs>
+      <linearGradient id="loaderGradient">
+        <stop offset="5%"  stop-color="lightgreen" stop-opacity="0.5"/>
+        <stop offset="95%" stop-color="mediumseagreen" stop-opacity="0.5"/>
+      </linearGradient>
+    </defs>
+    <circle class="svg-circle" cx="100" cy="100" r="100" fill="url(#loaderGradient)" />
+  </svg>
+  <div class="overlay js-overlay" style="display: none;"></div>
+
   <div class="wrapper ">
     <?php $this->load->view('incl/sidebar') ?>
     <div class="main-panel">
@@ -193,6 +310,8 @@
           <script src="<?= base_url('') ?>/assets/js/demo.js"></script>
           <script>
             function removedatalahan(id) {
+              let loader = document.querySelector(".js-svg-loader"),
+              overlay = document.querySelector(".js-overlay");
               Swal.fire({
                 title: 'Apakah Yakin data akan di hapus ?',
                 text: "Klik Ya",
@@ -207,6 +326,10 @@
                     url: '<?= site_url('Main/HapusData') ?>',
                     type: "POST",
                     data: {id:id},
+                    beforeSend:function() {
+                      loader.style.display = "block";
+                      overlay.style.display = "block";
+                    },
                     success: function (response) {
                       Swal.fire(
                         'Data Berhasil di Hapus',
@@ -227,6 +350,8 @@
             $(document).ready(function() {
               $("#kirimpolygon").submit(function (event) {
                 var data = new FormData($(this)[0]);
+                let loader = document.querySelector(".js-svg-loader"),
+                overlay = document.querySelector(".js-overlay");
                 Swal.fire({
                   title: 'Data Sudah benar ?',
                   text: "Klik Ya",
@@ -244,12 +369,18 @@
                       contentType: false,
                       cache: false,
                       processData: false,
+                      beforeSend:function (argument) {
+                        loader.style.display = "block";
+                        overlay.style.display = "block";
+                      },
                       success: function (response) {
                       // console.log(response);
                       Swal.fire(
                         'Data Berhasil di simpan',
                         );
                       $("#kirimpolygon")[0].reset();
+                        loader.style.display = "none";
+                        overlay.style.display = "none";
                     },
                     error: function () {
                       Swal.fire(
