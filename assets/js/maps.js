@@ -94,12 +94,13 @@
 
        for (var i =0; i < po.getLength(); i++) {
         var xy = po.getAt(i);
-        contentString += '<br>' + xy.lat()+','+xy.lng();
+        contentString += xy.lat()+','+xy.lng()+'<br>';
       }
       var res = contentString.split("undefined");
       var h =  res[1].slice(0, -1);
+      var hasil = h.replace(/\s/g, '');
       var area_t = google.maps.geometry.spherical.computeArea(poly.getPath().getArray()).toFixed(2);
-      $('#polygon').val(h);
+      $('#polygon').val(hasil);
       $('#luas').val(area_t);
       var hektar = area_t/10000;
       $('#luasha').val(hektar.toFixed(2));
@@ -110,10 +111,11 @@
                   // alert(coordinates);
                   for (var i =0; i < po.getLength(); i++) {
                     var xy = po.getAt(i);
-                    contentString += '<br>' + xy.lat()+','+xy.lng();
+                    contentString +=  xy.lat()+','+xy.lng()+'<br>';
                   }
                   var res = contentString.split("undefined");
                   var h =  res[1].slice(0, -1);
+                  var hasil = h.replace(/\s/g, '');
                   var round = google.maps.geometry.spherical.computeArea(poly.getPath().getArray()).toFixed(2);
                   $('#polygon').val(h);
                   $('#luas').val(round);

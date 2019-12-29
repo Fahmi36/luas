@@ -211,7 +211,7 @@
                       Swal.fire(
                         'Data Berhasil di Hapus',
                         );
-                      window.reload();
+                      location.reload();
                     },
                     error: function () {
                       Swal.fire(

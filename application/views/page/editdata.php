@@ -163,7 +163,7 @@
           for (var j=0; j < str.length; j++) { 
             var point = str[j].split(",");
             cords.push(new google.maps.LatLng(parseFloat(point[0]), parseFloat(point[1])));
-          console.log(point);
+            console.log(point);
           }
 
           var ar = msg.wilayah.lahan[i].luas;
@@ -194,7 +194,7 @@
                     // Iterate over the vertices.
                     for (var i =0; i < vertices.getLength(); i++) {
                       var xy = vertices.getAt(i);
-                      contentString += '<br>' + xy.lat()+','+xy.lng();
+                      contentString += xy.lat()+','+xy.lng()+ '<br>';
                     }
                     var h =  google.maps.geometry.spherical.computeArea(this.getPath()).toFixed(2);
 
@@ -244,7 +244,7 @@
 
       for (var i =0; i < po.getLength(); i++) {
         var xy = po.getAt(i);
-        contentString += '<br>' + xy.lat()+','+xy.lng();
+        contentString += xy.lat()+','+xy.lng()+ '<br>';
       }
       var res = contentString.split("undefined");
       var area = google.maps.geometry.spherical.computeArea(poly.getPath().getArray()).toFixed(2);
@@ -259,7 +259,7 @@
                   // alert(coordinates);
                   for (var i =0; i < po.getLength(); i++) {
                     var xy = po.getAt(i);
-                    contentString += '<br>' + xy.lat()+','+xy.lng();
+                    contentString += xy.lat()+','+xy.lng()+ '<br>';
                   }
 
                   var area = google.maps.geometry.spherical.computeArea(poly.getPath().getArray()).toFixed(2);
