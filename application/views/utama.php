@@ -381,7 +381,7 @@
                     type: "POST",
                     data: {id:id},
                     beforeSend:function() {
-                      $(".loader-overlay").removeAttr('display');
+                      $(".loader-overlay").removeAttr('style');
                     },
                     success: function (response) {
                       Swal.fire(
@@ -421,7 +421,7 @@
                       cache: false,
                       processData: false,
                       beforeSend:function (argument) {
-                        $(".loader-overlay").removeAttr('display');
+                        $(".loader-overlay").removeAttr('style');
                       },
                       success: function (response) {
                       // console.log(response);
