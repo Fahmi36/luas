@@ -99,7 +99,7 @@
       var area_t = google.maps.geometry.spherical.computeArea(poly.getPath().getArray()).toFixed(2);
       $('#polygon').val(contentString);
       $('#luas').val(area_t);
-      $('#luasha').val(area_t/10000);
+      $('#luasha').val(area_t/10000).toFixed(2);
 
       poly.getPaths().forEach(function(path, index){
         google.maps.event.addListener(path, 'set_at', function(){
@@ -112,7 +112,7 @@
                   var round = google.maps.geometry.spherical.computeArea(poly.getPath().getArray()).toFixed(2);
                   $('#polygon').val(contentString);
                   $('#luas').val(round);
-                  $('#luasha').val(round/10000);
+                  $('#luasha').val(round/10000).toFixed(2);
         });
       });
 

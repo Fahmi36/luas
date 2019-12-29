@@ -196,10 +196,10 @@
                       var xy = vertices.getAt(i);
                       contentString += '<br>' + xy.lat()+','+xy.lng();
                     }
-                    var res = contentString.split("undefined");
-                    var h =  contentString.slice(0, -1);
-                    $('#polygonedit').val(h);
-                    $('#luasedit').val(Math.round(google.maps.geometry.spherical.computeArea(this.getPath()))*100)/100;
+                    var h =  google.maps.geometry.spherical.computeArea(this.getPath())).toFixed(2);
+                    $('#polygonedit').val(contentString);
+                    $('#luasedit').val(h);
+                    $('#luaseditha').val(area/10000).toFixed(2);
 
                     // Replace the info window's content and position.
                     infoWindows.setContent("Polygon Berhasil Dirubah");
@@ -244,7 +244,7 @@
       var area = google.maps.geometry.spherical.computeArea(poly.getPath().getArray()).toFixed(2);
       $('#polygonedit').val(contentString);
       $('#luasedit').val(area);
-      $('#luaseditha').val(area/10000);
+      $('#luaseditha').val(area/10000).toFixed(2);
 
       poly.getPaths().forEach(function(path, index){
         google.maps.event.addListener(path, 'set_at', function(){
@@ -259,7 +259,7 @@
               
                   $('#polygonedit').val(contentString);
                   $('#luasedit').val(area);
-                  $('#luaseditha').val(area/10000);
+                $('#luaseditha').val(area/10000).toFixed(2);
           // Point was moved
         });
       });
