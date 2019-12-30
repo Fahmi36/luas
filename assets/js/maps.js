@@ -32,7 +32,7 @@
           var mapOptions = {
             center: latlng,
             zoom: 18,
-            mapTypeId: google.maps.MapTypeId.ROADMAP,
+            mapTypeId: "satellite",
             draggableCursor: "crosshair",
             myLocation: true
           };

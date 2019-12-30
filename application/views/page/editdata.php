@@ -158,7 +158,7 @@
         var petaoption = {
           center: wilayah,
           zoom: 19,
-          mapTypeId: google.maps.MapTypeId.ROADMAP
+          mapTypeId: "satellite",
         };
 
         for(i=0;i<msg.wilayah.lahan.length;i++){
