@@ -11,7 +11,7 @@
         <form method="post" action="javascript:void(0)" id="kirimeditpolygon">
           <div class="form-group label-floating has-success">
             <label class="control-label">Luas Tanah</label>
-            <input type="text" name="luas" value="<?=$datanya->luas?>" id="luasedit" class="form-control" />
+            <input type="text" name="luasedit" value="<?=$datanya->luas?>" id="luasedit" class="form-control" />
             <input type="hidden" name="idaset" value="<?=$datanya->id?>" class="form-control" />
             <span class="form-control-feedback">
               M<sup>2</sup>
@@ -19,7 +19,7 @@
           </div>
           <div class="form-group label-floating has-success">
             <label class="control-label">Luas Tanah</label>
-            <input type="text" name="luasha" value="<?=$datanya->luasha?>" id="luaseditha" class="form-control" />
+            <input type="text" name="luaseditha" value="<?=$datanya->luasha?>" id="luaseditha" class="form-control" />
             <span class="form-control-feedback">
               Hektar<sup>2</sup>
             </span>
