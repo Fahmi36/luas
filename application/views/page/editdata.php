@@ -4,6 +4,8 @@
         <h4 class="card-title">Edit Data Luas Tanah</h4>
       </div>
       <div class="card-body">
+
+                        <input type="text" placeholder="Masukan Nama Tempat" id="search_address">
         <p id="tampilkan"></p>
         <div id="mapsnya" style="height:400px;margin-bottom:20px;background: #FFF;padding: 10px;border:solid 1px #DDD"></div>
         <form method="post" action="javascript:void(0)" id="kirimeditpolygon">
@@ -322,6 +324,40 @@
 
      drawingManager.setMap(map);
    }
+     var input = document.getElementById('search_address');//Untuk memanggil id search autocomplete
+
+      var autocomplete = new google.maps.places.Autocomplete(input);
+      autocomplete.bindTo('bounds', map);
+      autocomplete.setTypes([]);
+
+      var infowindow = new google.maps.InfoWindow();
+      marker = new google.maps.Marker({
+        map: map,
+        anchorPoint: new google.maps.Point(0, -29)
+      });
+
+      google.maps.event.addListener(autocomplete, 'place_changed', function() {
+      //infowindow.close();
+      marker.setVisible(true);
+      var place = autocomplete.getPlace();
+
+      if (!place.geometry) return;
+
+      // If the place has a geometry, then present it on a map.
+      if (place.geometry.viewport) {
+        map.fitBounds(place.geometry.viewport);
+      } else {
+        map.setCenter(place.geometry.location);
+        map.setZoom(17);  // Why 17? Because it looks good.
+      }
+      marker.setIcon();
+      marker.setPosition(place.geometry.location);
+      geocodePosition(marker.getPosition());
+      var namanya = place.name;
+      var addrnya = place.formatted_address;
+      marker.setVisible(true);
+      setLatLong(place.geometry.location.lat(), place.geometry.location.lng(),namanya,addrnya);
+    });
 
    function geocodePosition(pos) {
     geocoder.geocode({
