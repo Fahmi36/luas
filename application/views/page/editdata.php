@@ -5,7 +5,7 @@
       </div>
       <div class="card-body">
 
-                        <input type="text" placeholder="Masukan Nama Tempat" id="search_address">
+                        <input type="text" placeholder="Masukan Nama Tempat" class="form-control" id="search_address">
         <p id="tampilkan"></p>
         <div id="mapsnya" style="height:400px;margin-bottom:20px;background: #FFF;padding: 10px;border:solid 1px #DDD"></div>
         <form method="post" action="javascript:void(0)" id="kirimeditpolygon">
