@@ -253,7 +253,7 @@ view.when(function() {
           for (var i = 0; i < array.length; i++) {
             var ver = array;
             //Ini untuk misah data x dan y, secara manual
-            content += ver[i][0]+','+ver[i][1]+'<br>';
+            content += ver[i][1]+','+ver[i][0]+'<br>';
           }
           // Karna di dalam kontent x dan y itu ada kata undifined maka saya potong kata undifined
           var res = content.split("undefined");
