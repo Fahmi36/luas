@@ -52,5 +52,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $route['default_controller'] = 'Main';
 $route['hitung_luas'] = 'Main/hitung_luas';
 $route['editlahan/(:any)'] = 'Main/editData';
+$route['maps'] = 'Main/argismaps';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;

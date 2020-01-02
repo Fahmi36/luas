@@ -27,6 +27,12 @@ class Main extends CI_Controller {
 		$data['datanya'] = $this->MainModel->getData();
 		$this->load->view('utama', $data);
 	}
+	public function argismaps()
+	{
+		$data['link_page'] = 'page/arcgis';
+		$data['title'] = 'Halaman Dashboard';
+		$this->load->view('utama', $data);
+	}
 	public function hitung_luas()
 	{
 		$data['link_page'] = 'page/hitung';
